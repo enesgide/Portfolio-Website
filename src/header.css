@@ -1,0 +1,10 @@
+.nav-bar li {
+    border-bottom: 2px solid transparent;
+    border-top: 2px solid transparent;
+    transition: 0.15s ease;
+}
+
+.nav-bar li:hover {
+    border-bottom: 2px solid;
+    transition: 0.2s ease;
+}

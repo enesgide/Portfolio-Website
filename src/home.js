@@ -1,12 +1,12 @@
-import NavBar from './header.js'
+import Navbar from './header.js'
 
 import './index.css';
-import './app.css';
+import './home.css';
 
 function App() {  
   return (    
     <div className="App">
-      <NavBar/>
+      <Navbar/>
 
       <div style={{textAlign:'center'}}>
         <Job salary={90000} position="Senior SDE" company="Amazon"/>
