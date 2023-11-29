@@ -1,30 +1,21 @@
-import Navbar from './header.js'
-
+import React, { useState } from "react";
 import './index.css';
-import './home.css';
 
-function App() {  
+function Home() {  
+  const [name, setName] = useState('Enes');
+  
+  const handleClick = (newName) => {
+    if (name == 'Enes') setName('Gide');
+    else setName('Enes');
+  };
+
   return (    
-    <div className="App">
-      <Navbar/>
-
-      <div style={{textAlign:'center'}}>
-        <Job salary={90000} position="Senior SDE" company="Amazon"/>
-        <Job salary={12000} position="Junior SDE" company="Google"/>
-        <Job salary={10000} position="Project Manager" company="Netflix"/>
+      <div className="content">
+          <button onClick={() => handleClick('Gide')}>
+            <p>My name is { name }</p>
+          </button>
       </div>
-    </div>
   );
 }
 
-function Job(props) {
-  return (
-    <div>
-      <h1>Company = {props.company}</h1>
-      <h2>Position = {props.position}</h2>
-      <h3>Salary = {props.salary}</h3>
-    </div>
-  );
-}
-
-export default App;
+export default Home;
