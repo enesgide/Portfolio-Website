@@ -1,40 +1,52 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './index.css';
 
 const GamesList = ({heading="GAMES", isSearch=false}) => {  
-  const games = [
-    {id: 1, title: "Pet Simulator"},
-    {id: 2, title: "Epic Obby"},
-    {id: 3, title: "Fun Obby"},
-    {id: 4, title: "Balloon Simulator"},
-    {id: 5, title: "Hamster Simulator"},
-  ];
 
-  const [searchedGames, setSearchedGames] = useState([])
+  const [games, setGames] = useState(null);
+
+  const [searchedGames, setSearchedGames] = useState(null);
 
   const updateSearch = (e) => {
     const input = e.target.value.toLowerCase();
-    if (input.length < 1) return setSearchedGames([]);
-    setSearchedGames(games.filter((game) => (game.title.toLowerCase()).includes(input)))
+    if (input.length < 1) return setSearchedGames(null);
+    setSearchedGames(games.filter((game) => (game.title.toLowerCase()).includes(input)));
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      fetch("http://localhost:8000/games")
+      .then(res => res.json())
+      .then(data => setGames(data))
+    }, 1000);
+  }, []);
 
   return (   
       <div className="content">
           <h1>{ heading }</h1>
-          {isSearch ?
-            <div>
-              <input placeholder="Search here..." onChange={updateSearch}/>
-              {searchedGames.map((game) => (
-                <p>{ game.title }</p>
-              ))}
-            </div>             
-            :
-            <div>
-              {games.map((game) => (
-                <p>{ game.title }</p>
-              ))}
-            </div> 
-          }          
+
+          {/* Check if games fetch has loaded yet */}
+          {!games ? <h2>Loading...</h2> : 
+            /* Check if it's a filtered games list */
+            (isSearch ?
+              <div>
+                <input placeholder="Search here..." onChange={updateSearch}/>
+                {/* Check if there are any found filtered games */}
+                {searchedGames &&
+                  (searchedGames.map((game) => (
+                    <p key={ game.id }>{ game.title }</p>
+                  )))
+                }
+              </div>             
+              :
+              /* Display all games list */
+              <div>      
+                {games.map((game) => (
+                  <p key={ game.id }>{ game.title }</p>
+                ))}
+              </div> 
+            )  
+          }   
       </div>
   );
 }

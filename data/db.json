@@ -1,0 +1,9 @@
+{
+    "games": [
+        {"id": 1, "title": "Pet Simulator"},
+        {"id": 2, "title": "Epic Obby"},
+        {"id": 3, "title": "Fun Obby"},
+        {"id": 4, "title": "Balloon Simulator"},
+        {"id": 5, "title": "Hamster Simulator"}
+    ]    
+}
