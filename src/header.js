@@ -1,6 +1,8 @@
 import './index.css'
 
 const NavBar = () => {
+    const logo = "/Images/Logo2.png";
+    
     const navLinks = [
         {text: "Home", url: "https://www.roblox.com"},
         {text: "Games", url: "https://www.roblox.com"},
@@ -10,7 +12,10 @@ const NavBar = () => {
 
     return (
         <div className="nav-bar" style={{display: 'flex', justifyContent: 'space-between'}}>
-            <a id="logo" style={{marginLeft: '3.5%'}}>LogoText</a>
+            <a href="/" style={{marginLeft: '2%', height: '50px'}}>
+                <img id="logo" src={ logo } alt="Enes Gide" height={'100%'}/>
+            </a>
+
             <ul style={{marginRight: '3.5%', justifyContent: 'flex-end'}}>
                 {navLinks.map((navlink) => (
                     <NavButton text={ navlink.text } url={ navlink.url }/>

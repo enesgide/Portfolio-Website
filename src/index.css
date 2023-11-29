@@ -38,3 +38,18 @@ ul {
   font-size: 0.9rem;
   align-items: center;
 }
+
+.nav-bar li {
+  border-bottom: 2px solid transparent;
+  border-top: 2px solid transparent;
+  transition: 0.15s ease;
+}
+
+.nav-bar li:hover {
+  border-bottom: 2px solid;
+  transition: 0.2s ease;
+}
+
+.nav-bar #logo:hover {  
+  filter: brightness(0) saturate(100%) invert(90%) sepia(10%) saturate(6500%) hue-rotate(180deg) brightness(110%) contrast(105%);
+}
