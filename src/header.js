@@ -4,10 +4,10 @@ const NavBar = () => {
     const logo = "/Images/Logo2.png";
     
     const navLinks = [
-        {text: "Home", url: "https://www.roblox.com"},
-        {text: "Games", url: "https://www.roblox.com"},
-        {text: "Projects", url: "https://www.roblox.com"},
-        {text: "Contact", url: "https://www.roblox.com"},
+        {id: 1, text: "Home", url: "https://www.roblox.com"},
+        {id: 2, text: "Games", url: "https://www.roblox.com"},
+        {id: 3, text: "Projects", url: "https://www.roblox.com"},
+        {id: 4, text: "Contact", url: "https://www.roblox.com"},
     ]
 
     return (
@@ -18,7 +18,7 @@ const NavBar = () => {
 
             <ul style={{marginRight: '3.5%', justifyContent: 'flex-end'}}>
                 {navLinks.map((navlink) => (
-                    <NavButton text={ navlink.text } url={ navlink.url }/>
+                    <NavButton key={ navlink.id } text={ navlink.text } url={ navlink.url }/>
                 ))}
             </ul>
         </div>

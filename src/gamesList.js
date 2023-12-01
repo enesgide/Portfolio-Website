@@ -4,8 +4,8 @@ import './index.css';
 const GamesList = ({heading="GAMES", isSearch=false}) => {  
 
   const [games, setGames] = useState(null);
-
   const [searchedGames, setSearchedGames] = useState(null);
+  const [error, setError] = useState(null);
 
   const updateSearch = (e) => {
     const input = e.target.value.toLowerCase();
@@ -14,11 +14,16 @@ const GamesList = ({heading="GAMES", isSearch=false}) => {
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      fetch("http://localhost:8000/games")
-      .then(res => res.json())
-      .then(data => setGames(data))
-    }, 1000);
+    fetch("http://localhost:8000/games")
+      .then(res => {
+        if (!res.ok) throw Error("Could not fetch resource data");
+        return res.json();
+      })
+      .then(data => {
+        setError(null);
+        setGames(data);
+      })
+      .catch((err) => setError(err.message))
   }, []);
 
   return (   
@@ -26,7 +31,8 @@ const GamesList = ({heading="GAMES", isSearch=false}) => {
           <h1>{ heading }</h1>
 
           {/* Check if games fetch has loaded yet */}
-          {!games ? <h2>Loading...</h2> : 
+          {!games ? (error ? <h2 style={{color:'red'}}>{ error }</h2> : <h2>Loading...</h2>)
+            : 
             /* Check if it's a filtered games list */
             (isSearch ?
               <div>
