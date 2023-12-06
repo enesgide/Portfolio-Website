@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import GamesList from './gamesList.js'
-import './index.css';
+import GamesList from '../components/gamesList.jsx'
 
 function Home() {  
   const [name, setName] = useState('Enes');
@@ -19,6 +18,7 @@ function Home() {
           <GamesList heading="MY GAMES"/>
 
           <GamesList heading="SEARCH FOR GAMES" isSearch={true}/>
+          {/* <GamesList heading="SEARCH FOR GAMES" isSearch={true}/> */}
       </div>
   );
 }

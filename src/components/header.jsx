@@ -1,13 +1,13 @@
-import './index.css'
+import { Link } from 'react-router-dom';
 
 const NavBar = () => {
     const logo = "/Images/Logo2.png";
     
     const navLinks = [
-        {id: 1, text: "Home", url: "https://www.roblox.com"},
-        {id: 2, text: "Games", url: "https://www.roblox.com"},
-        {id: 3, text: "Projects", url: "https://www.roblox.com"},
-        {id: 4, text: "Contact", url: "https://www.roblox.com"},
+        {id: 1, text: "Home", url: "/"},
+        {id: 2, text: "Games", url: "/games"},
+        {id: 3, text: "Projects", url: "/projects"},
+        {id: 4, text: "Contact", url: "/contact"},
     ]
 
     return (
@@ -32,9 +32,9 @@ const NavButton = (props) => {
             margin: '10px',
             padding: '10px',
         }}>
-            <a href={ props.url }>
+            <Link to={ props.url }>
                 { props.text.toUpperCase() }
-            </a>
+            </Link>
         </li>
     );
 }
