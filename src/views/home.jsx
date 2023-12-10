@@ -17,7 +17,6 @@ function Home() {
 
           <GamesList heading="MY GAMES"/>
 
-          <GamesList heading="SEARCH FOR GAMES" isSearch={true}/>
           {/* <GamesList heading="SEARCH FOR GAMES" isSearch={true}/> */}
       </div>
   );
