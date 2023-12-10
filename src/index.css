@@ -40,16 +40,57 @@ ul {
 }
 
 .nav-bar li {
-  border-bottom: 2px solid transparent;
-  border-top: 2px solid transparent;
-  transition: 0.15s ease;
+  position: relative;
+  border-bottom: 2px solid transparent; /* Keep this for consistent layout */
 }
 
-.nav-bar li:hover {
-  border-bottom: 2px solid;
-  transition: 0.2s ease;
+.nav-bar li::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0%;
+  height: 2px;
+  background-color: white; /* Or specific color */
+  transition: width 0.2s ease; /* Adjust the duration as needed */
+  transform: translateX(-50%);
+}
+
+.nav-bar li:hover::before {
+  width: 100%;
+  transform: translateX(-50%);
 }
 
 .nav-bar #logo:hover {  
   filter: brightness(0) saturate(100%) invert(90%) sepia(10%) saturate(6500%) hue-rotate(180deg) brightness(110%) contrast(105%);
+}
+
+.games-container {
+  position: relative;
+  width: 460px;
+  height: 150px;
+  border: 5px solid red;
+}
+
+.games-container .slider {
+  overflow-x: hidden;
+  cursor: grab;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 5px;
+  scroll-behavior: auto;
+}
+
+.games-container .slider::-webkit-scrollbar {
+  display: none;
+}
+
+.games-container #game-item {
+  box-sizing: border-box;
+  width: 150px;
+  height: 150px;
+  border: 5px solid black;
+  border-radius: 10px;
+  flex-shrink: 0;
 }

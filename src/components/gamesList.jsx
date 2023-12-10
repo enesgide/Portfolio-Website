@@ -1,33 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import useFetch from '../scripts/useFetch.js'
-import { getIdFromUsername, getGamesFromId } from '../scripts/robloxEndpoints.js'
+import { handleDrag, duplicateGames } from '../scripts/gamesContainer.js'
+// import { getIdFromUsername, getGamesFromId } from '../scripts/robloxEndpoints.js'
 
 const GamesList = ({heading="GAMES", isSearch=false}) => {  
   // Load pre-set games from json db
   const { data: games, isPending, error } = useFetch("http://localhost:8000/games");
-
-  // Load user games
-  /*const username = "MuPower";
-  const [userId, setUserId] = useState(null);
-  const [userGames, setUserGames] = useState(null);
-
-  useEffect(() => {
-    getIdFromUsername(username)
-      .then(id => {
-        setUserId(id);
-      })
-      .catch(err => console.log(err))
-  }, []);
-
-  useEffect(() => {
-    if (userId) {
-      getGamesFromId(userId)
-        .then(id => {
-          setUserId(id);
-        })
-        .catch(err => console.log(err))
-    }    
-  }, [userId]);*/
 
   // Search games
   const [searchedGames, setSearchedGames] = useState([]);
@@ -37,6 +16,15 @@ const GamesList = ({heading="GAMES", isSearch=false}) => {
     if (input.length < 1) return setSearchedGames(null);
     setSearchedGames(games.filter((game) => (game.title.toLowerCase()).includes(input)));
   };
+
+  // Setup games container dragger
+  useEffect(() => {
+    if (!games) return;
+    handleDrag();
+  }, [games]);
+
+  // Duplicate start and end game items
+  const loopedGames = games ? duplicateGames(games, 5) : [];
 
   return (   
     <div className="content" style={{marginLeft:'3%'}}>
@@ -54,10 +42,18 @@ const GamesList = ({heading="GAMES", isSearch=false}) => {
       { games &&
         (!isSearch ?
           /* Display all games */
-          <div>      
-            {games.map((game) => (
-              <p key={ game.id }>{ game.title }</p>
-            ))}
+          <div className="games-container">
+            <div className="slider">
+              {loopedGames.map((game) => (
+                <div id="game-item" key={ game.id }>
+                  <Link to={`/games/${ game.id }`}>
+                    { game.title }
+                  </Link>                
+                </div>
+              ))}                           
+            </div>  
+            <button id="left-btn" style={{position: 'absolute', top: '50%', left: '0', transform: 'translateX(-50%) translateY(-50%)'}}>Left</button>  
+            <button id="right-btn" style={{position: 'absolute', top: '50%', right: '0', transform: 'translateX(50%) translateY(-50%)'}}>Right</button>
           </div>
           :
           /* Display searched games */

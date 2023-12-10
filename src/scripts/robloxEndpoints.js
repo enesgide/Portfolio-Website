@@ -1,6 +1,3 @@
-import React, { useState } from "react";
-import useFetch from './useFetch.js'
-
 export const getIdFromUsername = (username) => {
     const url = `https://users.roblox.com/v1/users/search?keyword=${username}&limit=10`
     

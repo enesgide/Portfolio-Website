@@ -34,7 +34,8 @@ const NavButton = (props) => {
         }}>
             <Link to={ props.url }>
                 { props.text.toUpperCase() }
-            </Link>
+            </Link>      
+            <span/>     
         </li>
     );
 }
